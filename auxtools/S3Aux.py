@@ -11,7 +11,6 @@ class S3Aux():
 
         elif mode == 'local':
             keys = fetch_credentials('aws_mat.json')
-            print(keys)
             ACCESS_KEY = keys['AWS_ACCESS_KEY_ID']
             SECRET_KEY = keys['AWS_SECRET_ACCESS_KEY']
             self.s3 = boto3.resource('s3',

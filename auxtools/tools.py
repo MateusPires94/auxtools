@@ -43,3 +43,13 @@ def fetch_credentials(filename, mode='local',
         filetype = filename.split('.')[-1]
         if filetype == 'json':
             return json.loads(body)
+
+def fetch_movie_api(filename):
+    credentials_folder = os.environ['CREDENTIALS_HOME']
+    f = open('{}/{}'.format(credentials_folder, filename), 'r')
+    filedata = f.read()
+    f.close()
+
+    filetype = filename.split('.')[-1]
+    if filetype == 'json':
+        return json.loads(filedata)
