@@ -1,0 +1,4 @@
+oauth2client
+pymysql
+boto3
+sqlalchemy

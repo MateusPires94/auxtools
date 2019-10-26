@@ -1,0 +1,13 @@
+README.md
+setup.py
+AuxTools.egg-info/PKG-INFO
+AuxTools.egg-info/SOURCES.txt
+AuxTools.egg-info/dependency_links.txt
+AuxTools.egg-info/not-zip-safe
+AuxTools.egg-info/requires.txt
+AuxTools.egg-info/top_level.txt
+auxtools/MySQLAux.py
+auxtools/PandasAux.py
+auxtools/S3Aux.py
+auxtools/__init__.py
+auxtools/tools.py
