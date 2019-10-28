@@ -14,7 +14,7 @@ class ExecutionController():
             self.engine = MySQLAux(database).engine()
             self.start = datetime.datetime.now()
             self.finish = datetime.datetime.now()
-            self.last_execution_id = pd.read_sql('SELECT max({}) FROM {}'.format(id_field,control_table),self.cnx)[id_field].values[0]
+            self.last_execution_id = pd.read_sql('SELECT max({0}) as {0} FROM {1}'.format(id_field,control_table),self.cnx)[id_field].values[0]
             self.last_status = pd.read_sql('SELECT status FROM {} WHERE {} = {}'.format(control_table,id_field,self.last_execution_id),self.cnx)['status'].values[0]
             self.filename = 'execution_log_{}.txt'.format(self.last_execution_id)
             self.remote_folder = 'logs'
