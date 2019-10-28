@@ -27,6 +27,8 @@ class ExecutionController():
         else:
             self.last_status='SUCCESS'
 
+    def set_id(self, x): 
+            self.last_execution_id = x
 
     def write_to_log(self,text):
         if self.use_controller == 1:
@@ -51,7 +53,7 @@ class ExecutionController():
 
             new_execution_id = self.last_execution_id + 1 
             print(self.last_execution_id)
-            self.last_execution_id = new_execution_id
+            self.set_id(new_execution_id)
             print(self.last_execution_id)
             self.write_to_log('Starting Execution {}'.format(self.last_execution_id))
             self.send_log_to_s3()
