@@ -17,6 +17,8 @@ class ExecutionController():
             self.filename = 'execution_log_{}.txt'.format(self.last_execution_id)
             self.remote_folder = 'logs'
             self.s3_link = 'https://{}.s3.amazonaws.com/{}/{}'.format(s3_bucket,self.remote_folder,self.filename)
+        else:
+            self.last_status='SUCCESS'
 
 
     def write_to_log(self,text):
@@ -61,6 +63,8 @@ class ExecutionController():
             cnx.commit()
             cursor.execute(query_2)
             cnx.commit()
+            write_to_log('Finishing Execution {}'.format(self.last_execution_id))
+            send_log_to_s3()
 
     def set_to_fail(self):
         if use_controller==1:
