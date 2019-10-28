@@ -50,8 +50,8 @@ class ExecutionController():
             self.cnx.commit()
 
             self.last_execution_id += 1 
-            write_to_log('Starting Execution {}'.format(self.last_execution_id))
-            send_log_to_s3()
+            self.write_to_log('Starting Execution {}'.format(self.last_execution_id))
+            self.send_log_to_s3()
             new_line = [
             {id_field:self.last_execution_id,
             'start':self.start,
@@ -70,8 +70,8 @@ class ExecutionController():
             self.cnx.commit()
             cursor.execute(query_2)
             self.cnx.commit()
-            write_to_log('Finishing Execution {}'.format(self.last_execution_id))
-            send_log_to_s3()
+            self.write_to_log('Finishing Execution {}'.format(self.last_execution_id))
+            self.send_log_to_s3()
 
     def set_to_fail(self):
         if self.use_controller==1:
