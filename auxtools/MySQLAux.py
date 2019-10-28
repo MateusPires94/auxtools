@@ -50,9 +50,16 @@ class MySQLAux():
         cnx = self.connect()
         cursor = cnx.cursor()
         for ix in index_list:
-            query = '''CREATE INDEX {0}_{1}_index
-                        ON {2}.{0} ({1})'''.format(table_name,ix,self.database)
-            cursor.execute(query)
-        cnx.commit()
+            try:
+                query = '''CREATE INDEX {0}_{1}_index
+                            ON {2}.{0} ({1})'''.format(table_name,ix,self.database)
+                cursor.execute(query)
+                cnx.commit()
+            except:
+                modify_query = '''ALTER TABLE {}.{} MODIFY {} VARCHAR(55)'''.format(self.database,table_name,ix)
+                cursor.execute(modify_query)
+                cnx.commit()
+                cursor.execute(query)
+                cnx.commit()
         cnx.close()
 
