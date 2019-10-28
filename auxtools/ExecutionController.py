@@ -2,6 +2,7 @@ import datetime
 import pandas as pd
 from .MySQLAux import MySQLAux
 from .S3Aux import S3Aux
+from .MailAux import MailAux
 
 
 class ExecutionController():
@@ -73,3 +74,7 @@ class ExecutionController():
             cursor = cnx.cursor()
             cursor.execute(query_1)
             cnx.commit()
+    def send_mail():
+        if self.use_controller==1:
+            mail = MailAux()
+            mail.send_mail('STONE-PROJECT-ERROR','Baixe o log aqui: {}'.format(self.s3_link),'MOVIES','mateusricardo94@gmail.com','mateus.ricardo@mobly.com.br')
