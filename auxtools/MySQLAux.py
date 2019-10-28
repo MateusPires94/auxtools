@@ -45,3 +45,14 @@ class MySQLAux():
                                                             self.host,
                                                             self.database))
         return engine
+
+    def create_indexes(self,table_name,index_list):
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        for ix in index_list:
+            query = '''CREATE INDEX {0}_{1}_index
+                        ON {2}.{0} ({1})'''.format(table_name,ix,self.database)
+            cursor.execute(query)
+        cnx.commit()
+        cnx.close()
+
