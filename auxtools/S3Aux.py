@@ -38,10 +38,10 @@ class S3Aux():
 
         self.s3.Object(self.bucket, remote_file).put(
             Body=open(local_file, 'rb'))
-        
+
         if public:
 
-            make_public(remote_file)
+            self.make_public(remote_file)
 
     def download(self, remote_file, local_file=None):
 
