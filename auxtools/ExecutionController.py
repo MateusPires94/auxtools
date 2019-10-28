@@ -53,7 +53,7 @@ class ExecutionController():
             self.write_to_log('Starting Execution {}'.format(self.last_execution_id))
             self.send_log_to_s3()
             new_line = [
-            {id_field:self.last_execution_id,
+            {self.id_field:self.last_execution_id,
             'start':self.start,
             'finish':datetime.datetime(2099,1,1,0,0,0),
             's3_link':'{}'.format(self.s3_link),
