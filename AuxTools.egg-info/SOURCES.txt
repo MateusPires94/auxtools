@@ -7,6 +7,7 @@ AuxTools.egg-info/not-zip-safe
 AuxTools.egg-info/requires.txt
 AuxTools.egg-info/top_level.txt
 auxtools/ExecutionController.py
+auxtools/MailAux.py
 auxtools/MySQLAux.py
 auxtools/PandasAux.py
 auxtools/S3Aux.py

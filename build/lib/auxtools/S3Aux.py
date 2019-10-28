@@ -28,7 +28,7 @@ class S3Aux():
         self.bucket = bucket
         self.working_folder = ''
 
-    def upload(self, local_file, remote_file=None):
+    def upload(self, local_file, remote_file=None,public=False):
 
         if not remote_file:
 
@@ -38,6 +38,10 @@ class S3Aux():
 
         self.s3.Object(self.bucket, remote_file).put(
             Body=open(local_file, 'rb'))
+
+        if public:
+
+            self.make_public(remote_file)
 
     def download(self, remote_file, local_file=None):
 
@@ -52,6 +56,10 @@ class S3Aux():
         f = open(local_file, 'wb')
         f.write(body)
         f.close()
+
+    def make_public(self,remote_file):
+        object_acl = self.s3.ObjectAcl(self.bucket,remote_file)
+        response = object_acl.put(ACL='public-read')
 
     def set_working_folder(self, folder):
 
