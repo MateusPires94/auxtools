@@ -32,9 +32,9 @@ class ExecutionController():
             self.filename = 'execution_log_{}.txt'.format(self.last_execution_id)
             self.s3_link = 'https://{}.s3.amazonaws.com/{}/{}'.format(self.s3_bucket,self.remote_folder,self.filename)
 
-    def write_to_log(self,text):
+    def write_to_log(self,text,mode='a'):
         if self.use_controller == 1:
-            f = open('{}/{}'.format(self.TMP, self.filename), 'w')
+            f = open('{}/{}'.format(self.TMP, self.filename), mode)
             f.write('{}      {}\n'.format(datetime.datetime.now(),text))
             f.close()
 
@@ -55,7 +55,7 @@ class ExecutionController():
 
             new_execution_id = self.last_execution_id + 1 
             self.set_id(new_execution_id)
-            self.write_to_log('Starting Execution {}'.format(self.last_execution_id))
+            self.write_to_log('Starting Execution {}'.format(self.last_execution_id),'w')
             self.send_log_to_s3()
             new_line = [
             {self.id_field:self.last_execution_id,
