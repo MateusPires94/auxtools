@@ -39,7 +39,7 @@ class ExecutionController():
             s3 = S3Aux(self.s3_bucket)
             local_file = '{}/{}'.format(self.TMP, self.filename)
             remote_file = '{}/{}'.format(self.remote_folder,self.filename)
-            s3.upload(local_file,remote_file)
+            s3.upload(local_file,remote_file,public=True)
 
     def start_new_execution(self):
 
@@ -49,7 +49,10 @@ class ExecutionController():
             cursor.execute(query)
             self.cnx.commit()
 
-            self.last_execution_id += 1 
+            new_execution_id = self.last_execution_id + 1 
+            print(self.last_execution_id)
+            self.last_execution_id = new_execution_id
+            print(self.last_execution_id)
             self.write_to_log('Starting Execution {}'.format(self.last_execution_id))
             self.send_log_to_s3()
             new_line = [
