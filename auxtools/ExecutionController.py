@@ -45,9 +45,9 @@ class ExecutionController():
 
         if self.use_controller==1:
             query = '''UPDATE {} set status ='FAILED' where status = 'RUNNING' '''.format(self.control_table)
-            cursor = cnx.cursor()
+            cursor = self.cnx.cursor()
             cursor.execute(query)
-            cnx.commit()
+            self.cnx.commit()
 
             self.last_execution_id += 1 
             write_to_log('Starting Execution {}'.format(self.last_execution_id))
@@ -65,20 +65,20 @@ class ExecutionController():
         if self.use_controller==1:
             query_1 = '''UPDATE {} set status ='SUCCESS' where status = 'RUNNING' and {} = {} '''.format(self.control_table,self.id_field,self.last_execution_id)
             query_2 = '''UPDATE {} set finish ='{}' where status = 'SUCCESS' and {} = {} '''.format(self.control_table,self.finish,id_field,self.last_execution_id)
-            cursor = cnx.cursor()
+            cursor = self.cnx.cursor()
             cursor.execute(query_1)
-            cnx.commit()
+            self.cnx.commit()
             cursor.execute(query_2)
-            cnx.commit()
+            self.cnx.commit()
             write_to_log('Finishing Execution {}'.format(self.last_execution_id))
             send_log_to_s3()
 
     def set_to_fail(self):
         if self.use_controller==1:
             query_1 = '''UPDATE {} set status ='FAILED' where status = 'RUNNING' and {} = {} '''.format(self.control_table,self.id_field,self.last_execution_id)
-            cursor = cnx.cursor()
+            cursor = self.cnx.cursor()
             cursor.execute(query_1)
-            cnx.commit()
+            self.cnx.commit()
     def send_mail(self):
         if self.use_controller==1:
             mail = MailAux()
