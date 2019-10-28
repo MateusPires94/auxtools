@@ -16,6 +16,7 @@ class ExecutionController():
             self.last_status = pd.read_sql('SELECT status FROM {} WHERE {} = {}'.format(control_table,id_field,self.last_execution_id),self.cnx)['status'].values[0]
             self.filename = 'execution_log_{}.txt'.format(self.last_execution_id)
             self.remote_folder = 'logs'
+            self.s3_link = 'https://{}.s3.amazonaws.com/{}/{}'.format(s3_bucket,self.remote_folder,self.filename)
 
 
     def write_to_log(self,text):
@@ -46,7 +47,7 @@ class ExecutionController():
             {id_field:self.last_execution_id,
             'start':self.start,
             'finish':datetime.datetime(2099,1,1,0,0,0),
-            's3_link':'https://{}.s3.amazonaws.com/{}/{}'.format(s3_bucket,self.remote_folder,self.filename),
+            's3_link':'{}'.format(s3_link),
             'status': 'RUNNING'}]
             df = pd.DataFrame(new_line)
             df.to_sql(control_table, engine, if_exists='append', index=False)
