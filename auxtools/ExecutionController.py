@@ -69,7 +69,7 @@ class ExecutionController():
     def finish_execution(self):
         if self.use_controller==1:
             query_1 = '''UPDATE {} set status ='SUCCESS' where status = 'RUNNING' and {} = {} '''.format(self.control_table,self.id_field,self.last_execution_id)
-            query_2 = '''UPDATE {} set finish ='{}' where status = 'SUCCESS' and {} = {} '''.format(self.control_table,self.finish,id_field,self.last_execution_id)
+            query_2 = '''UPDATE {} set finish ='{}' where status = 'SUCCESS' and {} = {} '''.format(self.control_table,self.finish,self.id_field,self.last_execution_id)
             cursor = self.cnx.cursor()
             cursor.execute(query_1)
             self.cnx.commit()
