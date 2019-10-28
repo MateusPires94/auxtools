@@ -74,7 +74,7 @@ class ExecutionController():
             cursor = cnx.cursor()
             cursor.execute(query_1)
             cnx.commit()
-    def send_mail():
+    def send_mail(self):
         if self.use_controller==1:
             mail = MailAux()
             mail.send_mail('STONE-PROJECT-ERROR','Baixe o log aqui: {}'.format(self.s3_link),'MOVIES','mateusricardo94@gmail.com','mateus.ricardo@mobly.com.br')
