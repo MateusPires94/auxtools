@@ -52,7 +52,7 @@ class MySQLAux():
         for ix in index_list:
             try:
                 query = '''CREATE INDEX {0}_{1}_index
-                            ON {2}.{0} ({1})'''.format(table_name,ix,self.database)
+                            ON {2}.{3} ({4})'''.format(table_name[0:10],ix[0:10],self.database,table_name,ix)
                 cursor.execute(query)
                 cnx.commit()
             except:
